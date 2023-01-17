@@ -59,7 +59,8 @@ class WeeklyWeatherViewModel: ObservableObject {
         receiveCompletion: { [weak self] value in
           guard let self = self else { return }
           switch value {
-          case .failure:
+          case let .failure(error):
+            print(error)
             self.dataSource = []
           case .finished:
             break

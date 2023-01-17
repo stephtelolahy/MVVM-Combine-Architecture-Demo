@@ -68,6 +68,9 @@ extension WeatherFetcher: WeatherFetchable {
       let error = WeatherError.network(description: "Couldn't create URL")
       return Fail(error: error).eraseToAnyPublisher()
     }
+    
+    print(url.absoluteString)
+    
     return session.dataTaskPublisher(for: URLRequest(url: url))
       .mapError { error in
         .network(description: error.localizedDescription)
@@ -85,7 +88,7 @@ private extension WeatherFetcher {
     static let scheme = "https"
     static let host = "api.openweathermap.org"
     static let path = "/data/2.5"
-    static let key = "<your key>"
+    static let key = "485a4f75d391bd309b9d3b95ed468587"
   }
   
   func makeWeeklyForecastComponents(
