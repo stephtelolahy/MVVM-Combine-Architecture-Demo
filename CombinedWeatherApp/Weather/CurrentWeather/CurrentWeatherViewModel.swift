@@ -32,7 +32,7 @@ import Combine
 class CurrentWeatherViewModel: ObservableObject {
   @Published var dataSource: CurrentWeatherRowViewModel?
 
-  let city: String
+  var city: String
   private let weatherFetcher: WeatherFetchable
   private var disposables = Set<AnyCancellable>()
 

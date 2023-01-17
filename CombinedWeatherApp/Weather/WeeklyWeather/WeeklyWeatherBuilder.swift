@@ -38,4 +38,10 @@ enum WeeklyWeatherBuilder {
       weatherFetcher: weatherFetcher)
     return CurrentWeatherView(viewModel: viewModel)
   }
+  
+  static func makeCurrentWeatherView(
+    viewModel: CurrentWeatherViewModel
+  ) -> some View {
+    return CurrentWeatherView(viewModel: viewModel)
+  }
 }

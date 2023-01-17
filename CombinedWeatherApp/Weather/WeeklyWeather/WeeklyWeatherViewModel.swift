@@ -32,6 +32,9 @@ import Combine
 class WeeklyWeatherViewModel: ObservableObject {
   @Published var city: String = ""
   @Published var dataSource: [DailyWeatherRowViewModel] = []
+  
+  // TODO find a better solution to avoid ViewModel multiple instanciation due to NavigationLink
+  private lazy var currentWeatherViewModel = CurrentWeatherViewModel(city: city, weatherFetcher: weatherFetcher)
 
   private let weatherFetcher: WeatherFetchable
   private var disposables = Set<AnyCancellable>()
@@ -76,9 +79,7 @@ class WeeklyWeatherViewModel: ObservableObject {
 
 extension WeeklyWeatherViewModel {
   var currentWeatherView: some View {
-    return WeeklyWeatherBuilder.makeCurrentWeatherView(
-      withCity: city,
-      weatherFetcher: weatherFetcher
-    )
+    currentWeatherViewModel.city = city
+    return WeeklyWeatherBuilder.makeCurrentWeatherView(viewModel: currentWeatherViewModel)
   }
 }
